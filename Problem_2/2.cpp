@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -13,7 +14,28 @@ using namespace std;
 // return 1 otherwise
 
 int SearchWord(string word, string fn, int &nLines, int &total) {
-
+  ifstream fin;
+  string line, element;
+  int last_total = 0;
+  fin.open(fn);
+  if (fin.fail()){
+    return 1;
+  }
+  while (getline(fin,line)){
+    istringstream line_in(line);
+    last_total = total;
+    while (line_in >> element){
+      for (int i=0; i<element.length();++i){
+        element[i]=tolower(element[i]);
+      }
+      if (element==word){
+        total++;
+      }
+      }
+    if (total != last_total){
+      nLines++;
+    }
+  }
   return 0;
 }
 
