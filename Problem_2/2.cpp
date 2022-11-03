@@ -10,46 +10,46 @@ using namespace std;
 // fn: name of file to search
 // nLines: (output) number of lines w appear in fn
 // total: (output) total number of occurrences of w in fn
-// return 0 if file operation is successful
-// return 1 otherwise
 
+
+//Function to find the number of lines {nLines} and the total occurence {total}
 int SearchWord(string word, string fn, int &nLines, int &total) {
   ifstream fin;
+  //Declare string {line} to read lines and string {element} to read individual words of the file {fn}
   string line, element;
+  //Declare integer {last_total} to count for the total number of occurences up until the previous line
   int last_total = 0;
+  //Open the file {fn}
   fin.open(fn);
   if (fin.fail()){
+    // Return 1 if file operation is unsuccessful
     return 1;
   }
+  //Read lines of file {fn} from top to bottom
   while (getline(fin,line)){
+    //Create an input string stream object istringstream
     istringstream line_in(line);
+    //Assign the total number of occurences of {word} up until the previous line to {last_total}
     last_total = total;
+    //Stored strings on each line {line_in} onto {element}
     while (line_in >> element){
+      //Convert all letters of {element} to lowercase
       for (int i=0; i<element.length();++i){
         element[i]=tolower(element[i]);
       }
+      //Total occurence {total} increments by 1 if found {word}
       if (element==word){
         total++;
-      }
-      }
+     }
+    }
+    //Number of lines {nLines} increments by 1 if the total occurence of {word} until the line is different from that until the previous line
     if (total != last_total){
       nLines++;
     }
   }
+  // Return 0 if file operation is successful
   return 0;
 }
-
-// argc is the number of arguments from the command line
-// argv[0] == program name
-// argv[1..argc-1] are the arguments
-// e.g., if this program's name is "prog" and the following command is run
-// at the command prompt:
-// > ./prog word file1 file2
-// then in the main function, argc is 4, and argv[0] is "./prog",
-// argv[1] is "word", argv[2] = "file1", argv[3] = "file2"
-//
-// usage: ./2 word_to_search file1 file2 files3 ...
-//
 
 int main(int argc, char* argv[])
 {
