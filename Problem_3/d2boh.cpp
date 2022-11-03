@@ -5,24 +5,30 @@
 #include "d2boh.h"
 using namespace std;
 
-int decimal_to_binary(int input, int output[10]) {
+int decimal_to_binary(int input, int output[10]){
+	//Declare integer {count} to store the number of digits after conversion
 	int count = 0;
+	//Display digits from higher index to lower index
 	for (int i = 9; i >= 0 ; --i){
 		if (input / pow(2,i) >= 1){
+			//The digit representing the {i}th exponents of 2 is stored at the (9-i)th index of the array {output}
 			output[9-i]=floor(input/pow(2,i));
+			//{input} reduces by 2^i after calculating the digit
 			input-=pow(2,i);
+			//{count} increments by 1 after calculating the digit
 			count++;
 		}
 		else if (count > 0){
 			count++;
 		}
-		}
-		
+	}	
 	return count;
-	}
+}
 
 int decimal_to_octal(int input, int output[10]) {
+	//Declare integer {count} to store the number of digits after conversion
 	int count = 0;
+	//Display digits from higher index to lower index
 	for (int i = 9; i >= 0 ; --i){
 		if (input / pow(8,i) >= 1){
 			output[9-i]=floor(input/pow(8,i));
@@ -37,6 +43,7 @@ int decimal_to_octal(int input, int output[10]) {
 }
 
 int decimal_to_hexadecimal(int input, char output[10]) {
+	//Declare integer {count} to store the number of digits after conversion
 	int count = 0;
 	for (int i = 9; i >= 0 ; --i){
 		if (input / pow(16,i) >= 1){
@@ -55,11 +62,3 @@ int decimal_to_hexadecimal(int input, char output[10]) {
 	}
 	return count;
 }
-// int main(){
-// 	int output[10]={};
-// 	cout << decimal_to_octal(36,output) << endl;
-// 	for (int i = 0; i< 10;++i){
-// 		cout << output[i] << " ";
-// 	}
-// 	return 0;
-// }
