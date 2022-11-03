@@ -52,8 +52,9 @@ int main(int argc, char* argv[]){
         //Display the hexadecimal number
         for (int i = (10 - decimal_to_hexadecimal(num, myarray)); i<10; ++i){
             cout<<myarray[i];
-    }
+        }
         //Display an empty line
-        cout << endl;}
+        cout << endl;
+    }
         return 0;
 }
