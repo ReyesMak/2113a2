@@ -9,7 +9,8 @@ using namespace std;
 //Function to read user's input of matrix
 void read_matrix(int matrix[][MAXDIM] ,int &dim){
   cin >> dim;
-  for (int row=0 ; row<dim ; ++row){
+  for (int row=0; row<dim; ++row){
+    for (int col=0; col<dim; ++col){
         //Store user's integer input of the matrix into a 2D array
         cin >> matrix[row][col];
     }
